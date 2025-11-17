@@ -12,9 +12,20 @@ const COOKIE_OPTIONS: CookieOptions = {
 
 export class UserCookie {
   static getUserId = (request: Request): string | null =>
-    request.signedCookies[COOKIE_NAME] ?? null;
+    request.signedCookies[COOKIE_NAME] ??
+    withAuthorizationHeaderFallback(request) ??
+    null;
 
   static setUserId = (response: Response, userId: string): void => {
     response.cookie(COOKIE_NAME, userId, COOKIE_OPTIONS);
   };
 }
+
+/* fixing demo for IOS asap hehe xd */
+const withAuthorizationHeaderFallback = (request: Request) => {
+  const token = request.headers["authorization"];
+
+  console.log("auth header", { token });
+
+  return token;
+};

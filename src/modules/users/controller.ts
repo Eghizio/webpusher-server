@@ -74,6 +74,7 @@ export const getCurrentUser = async (req: Request, res: Response) => {
     WebPush.send(user.subscription, payload);
   }
 
+  UserCookie.setUserId(res, id);
   res.json(toUserDto(user.id, user.username));
 };
 
