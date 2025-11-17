@@ -22,10 +22,5 @@ export class UserCookie {
 }
 
 /* fixing demo for IOS asap hehe xd */
-const withAuthorizationHeaderFallback = (request: Request) => {
-  const token = request.headers["authorization"];
-
-  console.log("auth header", { token });
-
-  return token;
-};
+const withAuthorizationHeaderFallback = (request: Request) =>
+  request.headers["authorization"];
